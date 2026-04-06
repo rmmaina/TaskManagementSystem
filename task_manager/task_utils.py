@@ -1,3 +1,23 @@
+# Define tasks list
+tasks = []
+
+# Dummy validation (replace with your actual module if you have one)
+class validation:
+    @staticmethod
+    def validate_task_title(title):
+        if not title:
+            raise ValueError("Title cannot be empty")
+        return title
+
+    @staticmethod
+    def validate_task_description(description):
+        return description or ""
+
+    @staticmethod
+    def validate_due_date(due_date):
+        return due_date  # add real validation if needed
+
+
 def add_task(title, description, due_date):
     title = validation.validate_task_title(title)
     description = validation.validate_task_description(description)
@@ -21,8 +41,9 @@ def mark_task_as_complete(task_index):
 
 
 def view_pending_tasks():
-    return [
+    pending_tasks = [
         f"{idx}. {task['title']} - Due: {task['due_date']}"
         for idx, task in enumerate(tasks)
         if not task["completed"]
     ]
+    return pending_tasks if pending_tasks else ["No pending tasks"]
